@@ -140,6 +140,7 @@ cython_debug/
 # Virtual env, dev collateral
 env/
 notebooks/
+out/
 
 # VS Code
 .vscode/
