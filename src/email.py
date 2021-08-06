@@ -36,6 +36,8 @@ def details(text, split_link="https://www.linkedin.com"):
 
 def extract(data_folder="data"):
     list_files = os.listdir(data_folder)
+    list_files = [x for x in list_files if not os.path.isdir(
+        os.path.join(data_folder, x))]
     job_ads_detailed = []
     for file in list_files:
         file_path = "data/"+file
