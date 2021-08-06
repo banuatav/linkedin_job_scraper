@@ -141,6 +141,7 @@ cython_debug/
 env/
 notebooks/
 out/
+data/dev/
 
 # VS Code
 .vscode/
