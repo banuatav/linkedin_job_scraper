@@ -1,6 +1,8 @@
 appnope==0.1.2
 autopep8==1.5.7
 backcall==0.2.0
+beautifulsoup4==4.9.3
+bs4==0.0.1
 cchardet==2.1.7
 certifi==2021.5.30
 chardet==4.0.0
@@ -16,6 +18,8 @@ jupyter-core==4.7.1
 linkedin-scraper==2.8.2
 lxml==4.6.3
 matplotlib-inline==0.1.2
+mysql==0.0.3
+mysqlclient==2.0.3
 parso==0.8.2
 pexpect==4.8.0
 pickleshare==0.7.5
@@ -28,6 +32,7 @@ pyzmq==22.1.0
 requests==2.25.1
 selenium==3.141.0
 six==1.16.0
+soupsieve==2.2.1
 toml==0.10.2
 tornado==6.1
 traitlets==5.0.5
