@@ -18,12 +18,13 @@ jupyter-core==4.7.1
 linkedin-scraper==2.8.2
 lxml==4.6.3
 matplotlib-inline==0.1.2
-mysql==0.0.3
+mysql-connector-python==8.0.26
 mysqlclient==2.0.3
 parso==0.8.2
 pexpect==4.8.0
 pickleshare==0.7.5
 prompt-toolkit==3.0.19
+protobuf==3.17.3
 ptyprocess==0.7.0
 pycodestyle==2.7.0
 Pygments==2.9.0
