@@ -23,10 +23,15 @@ def get_emails():
     num_messages = int(messages[0])
     print("Number of messages to read:", num_messages)
 
-    status, data = server.fetch('1:{}'.format(num_messages), '(RFC822)')
-    print("Email retrieval status:", status)
+    mails = []
 
-    return data
+    for i in range(1, num_messages+1):
+        status, msg = server.fetch(str(i), '(RFC822)')
+        print("{}: Email retrieval status: {}".format(i, status))
+
+        mails.append(msg)
+
+    return mails
 
 
 if __name__ == "__main__":
