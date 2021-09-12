@@ -2,12 +2,12 @@ import os
 from selenium import webdriver
 from linkedin_scraper import actions
 
-from src import email
+from src.gmail import eml
 from .job_ads import JobAd
 
 
 def scrape_jobs():
-    job_details = email.extract()
+    job_details = eml.process.extract()
     driver = webdriver.Chrome(os.environ["CHROMEDRIVER"])
     actions.login(
         driver, os.environ["LINKEDIN_EMAIL"], os.environ["LINKEDIN_PW"])
