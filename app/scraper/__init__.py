@@ -1,8 +1,12 @@
-import os
+import sys
+import os.path
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
+
 from selenium import webdriver
 from linkedin_scraper import actions
 
-from src.gmail import eml
+from gmail import eml
 from .job_ads import JobAd
 
 
