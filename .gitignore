@@ -139,6 +139,7 @@ cython_debug/
 
 # Virtual env, dev collateral
 env/
+Pipfile.lock
 notebooks/
 out/
 data/dev/
