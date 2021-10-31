@@ -20,7 +20,10 @@ def get_emails():
     status, messages = server.select(IN_FOLDER)
     print("Mailbox selection status:", status)
 
-    num_messages = int(messages[0])
+    if os.environ.get('ENVIRONMENT', None) == "PRODUCTION":
+        num_messages = int(messages[0])
+    else:
+        num_messages = 3 
     print("Number of messages to read:", num_messages)
 
     mails = []
