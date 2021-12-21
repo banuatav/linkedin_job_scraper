@@ -39,8 +39,7 @@ def select_mailbox(server, inbox_name):
     if status !="OK":
         raise Exception("Could not find ids of emails in mailbox {}".fromat(inbox_name))
 
-    ids = items[0].decode().split()
-    return ids
+    return items[0].decode().split()
 
 def fetch_email(id, server):
     return server.fetch(str(id), '(RFC822)')

@@ -18,31 +18,34 @@ class EmailReader:
         imap_actions.create_mailbox(self.server, self.destination_folder)
         self.list_mailboxes(verbose=True)
 
+        print("Selecting emails from mailbox: {}".format(self.inbox_name))
+        self.mail_ids = imap_actions.select_mailbox(self.server, self.inbox_name)
+        
+        print("Number of emails available:{}\n".format(len(self.mail_ids)))
+        
+        if not os.environ.get('ENVIRONMENT', None) == 'PRODUCTION' and len(self.mail_ids) > 3:
+            self.mail_ids = self.mail_ids[:3]
+            print("ENVIRONMENT not set to PRODUCTION, truncating number of read messages to {}.\n".format(len(self.mail_ids)))
+
     def list_mailboxes(self, verbose=False):
         list_server = imap_actions.list_mailboxes(self.server)
         if verbose:
             print("\nList of mailboxes:\n{}\n".format(list_server))
         return list_server
 
-    def process_emails(self):
-        print("Selecting emails from mailbox: {}".format(self.inbox_name))
-        mails_ids = imap_actions.select_mailbox(self.server, self.inbox_name)
-        print("Number of emails available:{}\n".format(len(mails_ids)))
-        
-        if not os.environ.get('PRODUCTION', None) == 'TRUE' and len(mails_ids) > 3:
-            mails_ids = mails_ids[:3]
-            print("Environment variable PRODUCTION not set TRUE, truncating number of read messages to {}.\n".format(len(mails_ids)))
-            
-        for id in mails_ids:
-            status, msg = imap_actions.fetch_email(id, self.server)
-            imap_actions.move_email(self.server, id, self.destination_folder)
+    def read_email(self, id):
+        status, msg = imap_actions.fetch_email(id, self.server)
 
-            if status !="OK":
-                print("{}: Email retrieval status: {}".format(id, status))
-            else:
-                extracted_data = data.extract_data(msg)
-                self.mails.append(EmailData(id=str(uuid.uuid1()), **extracted_data))
+        if status !="OK":
+            print("{}: Email retrieval status: {}".format(id, status))
+            raise Exception("Couldnt retrieve email.")
+        else:
+            extracted_data = data.extract_data(msg)
         
+        return EmailData(id=str(uuid.uuid1()), **extracted_data)
+    
+    def archive_email(self, id):
+        imap_actions.move_email(self.server, id, self.destination_folder)
+
+    def disconnect_server(self):
         imap_actions.disconnect(self.server)
-        return self.mails
-
