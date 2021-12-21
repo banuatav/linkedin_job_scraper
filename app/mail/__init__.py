@@ -1,10 +1,11 @@
 import os
 import collections
+import uuid
 
-from . import extract_data, imap_actions
+from . import data, imap_actions
 
 # Data Class
-EMAIL_FIELDS = ["subject", "sender", "date", "body", "body_alert", "body_jobs"]
+EMAIL_FIELDS = ["id", "subject", "sender", "date", "body", "body_alert", "body_jobs"]
 EmailData = collections.namedtuple("EmailData", EMAIL_FIELDS)
 
 class EmailReader:
@@ -32,7 +33,6 @@ class EmailReader:
             mails_ids = mails_ids[:3]
             print("Environment variable PRODUCTION not set TRUE, truncating number of read messages to {}.\n".format(len(mails_ids)))
             
-    
         for id in mails_ids:
             status, msg = imap_actions.fetch_email(id, self.server)
             imap_actions.move_email(self.server, id, self.destination_folder)
@@ -40,8 +40,8 @@ class EmailReader:
             if status !="OK":
                 print("{}: Email retrieval status: {}".format(id, status))
             else:
-                data = extract_data.extract_data(msg)
-                self.mails.append(EmailData(**data))
+                extracted_data = data.extract_data(msg)
+                self.mails.append(EmailData(id=str(uuid.uuid1()), **extracted_data))
         
         imap_actions.disconnect(self.server)
         return self.mails
