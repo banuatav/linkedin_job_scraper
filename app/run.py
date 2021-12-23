@@ -1,3 +1,4 @@
+import os
 from pymongo import MongoClient
 
 import mail, linkedin, settings
@@ -13,7 +14,7 @@ if __name__ == "__main__":
     col_job_ads = database.col_job_ads
 
     # Init 
-    email_reader = mail.EmailReader()
+    email_reader = mail.EmailReader(max_nr_mails=int(os.environ["MAX_NUM_MAILS"]))
     scraper = linkedin.PageScraper()
 
     

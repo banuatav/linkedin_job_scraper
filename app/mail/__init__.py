@@ -9,7 +9,7 @@ EMAIL_FIELDS = ["id", "subject", "sender", "date", "body", "body_alert", "body_j
 EmailData = collections.namedtuple("EmailData", EMAIL_FIELDS)
 
 class EmailReader:
-    def __init__(self, inbox_name=imap_actions.INBOX_FOLDER, destination_folder=imap_actions.DESTINATION_FOLDER):
+    def __init__(self, inbox_name=imap_actions.INBOX_FOLDER, destination_folder=imap_actions.DESTINATION_FOLDER, max_nr_mails=100):
         self.inbox_name = inbox_name
         self.destination_folder = destination_folder
         self.server = imap_actions.connect()
@@ -23,8 +23,8 @@ class EmailReader:
         
         print("Number of emails available:{}\n".format(len(self.mail_ids)))
         
-        if not os.environ.get('ENVIRONMENT', None) == 'PRODUCTION' and len(self.mail_ids) > 3:
-            self.mail_ids = self.mail_ids[:3]
+        if not os.environ.get('ENVIRONMENT', None) == 'PRODUCTION' and len(self.mail_ids) > max_nr_mails:
+            self.mail_ids = self.mail_ids[:max_nr_mails]
             print("ENVIRONMENT not set to PRODUCTION, truncating number of read messages to {}.\n".format(len(self.mail_ids)))
 
     def list_mailboxes(self, verbose=False):
