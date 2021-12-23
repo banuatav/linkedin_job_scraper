@@ -18,7 +18,7 @@ class PageScraper:
 
     def _navigate_page(self, link):
         self.driver.get(link)
-        time.sleep(2)
+        time.sleep(1)
 
     def _click_see_more(self):
         try:
@@ -30,7 +30,7 @@ class PageScraper:
             see_more = self.driver.find_element_by_xpath(_MORE_BUTTON_XPATH
                                                          )
             see_more.click()
-            time.sleep(2)
+            time.sleep(1)
         except:
             print("Couldn't find see_more'")
 

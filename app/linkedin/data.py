@@ -36,19 +36,19 @@ def extract_info(source_code):
     extracted_date = {}
 
     # Extract job name
-    extracted_date["job_name"] = extract_name(soup)
+    extracted_date["job_name"] = str(extract_name(soup))
 
     # Extract job description
-    extracted_date["job_descr"] = extract_description(soup)
+    extracted_date["job_descr"] = str(extract_description(soup))
     
     # Extract job poster
-    extracted_date["job_poster"] = extract_poster(soup)
+    extracted_date["job_poster"] = str(extract_poster(soup))
 
     # Extract job salary
-    extracted_date["job_salary"] = extract_salary(soup)
+    extracted_date["job_salary"] = str(extract_salary(soup))
 
     # Extract job company
-    extracted_date["job_company"] = extract_company(soup)
+    extracted_date["job_company"] = str(extract_company(soup))
 
     return extracted_date
     

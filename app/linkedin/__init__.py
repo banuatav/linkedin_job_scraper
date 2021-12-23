@@ -2,11 +2,6 @@ import collections
 import uuid
 from datetime import datetime
 
-import os
-import sys
-sys.path.append(
-    os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
-
 from . import data
 from .scraper import PageScraper
 
