@@ -1,4 +1,4 @@
-# LinkedIn Job Ad Scraper
+# LinkedIn Job Page Scraper
 
 Scrapes LinkedIn job pages from job alerts.
 
